@@ -1,6 +1,10 @@
 package business_android_client.croppercammer.view;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.Region;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -10,15 +14,55 @@ import android.view.View;
  */
 
 public class shadow extends View {
+
+    private int screenHeitht;
+    private int screenWidth;
+
     public shadow(Context context) {
-        super(context);
+        this(context,null);
     }
 
     public shadow(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs,0);
     }
 
     public shadow(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initView();
+    }
+
+    private void initView() {
+
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        canvas.clipRect(0, 0, screenWidth, screenHeitht);
+        canvas.clipRect(getShadowRegionRect(), Region.Op.DIFFERENCE);
+        canvas.drawColor(Color.GREEN);
+//        drawScene(canvas);
+        canvas.restore();
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        screenHeitht = getMeasuredHeight();
+        screenWidth = getMeasuredWidth();
+    }
+
+   private Rect getShadowRegionRect(){
+        int height= (int) (screenWidth/1.6);
+       int x_center=screenWidth/2;
+       int y_center=screenHeitht/2;
+       return new Rect(0, y_center - (height / 2), screenWidth, height/2 + y_center);
+
     }
 }
