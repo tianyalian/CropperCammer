@@ -59,10 +59,13 @@ public class shadow extends View {
     }
 
    private Rect getShadowRegionRect(){
-        int height= (int) (screenWidth/1.6);
+       int height = (int) (screenWidth * 0.8);
+       int width = (int) (height * 1.6);
+//        int height= (int) (screenWidth/1.6);
        int x_center=screenWidth/2;
        int y_center=screenHeitht/2;
-       return new Rect(0, y_center - (height / 2), screenWidth, height/2 + y_center);
+//       return new Rect(0, y_center - (height / 2), screenWidth, height/2 + y_center);
+       return new Rect(x_center-(height/2), y_center - (height / 2), x_center+(height/2), (width/2)+ y_center);
 
     }
 }
