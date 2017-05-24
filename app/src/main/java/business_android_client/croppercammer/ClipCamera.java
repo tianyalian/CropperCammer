@@ -191,20 +191,21 @@ public class ClipCamera extends SurfaceView implements SurfaceHolder.Callback, C
                 bm = BitmapFactory.decodeByteArray(data, 0, data.length);
                 int pic_width = bm.getWidth();//1280
                 int  pic_height= bm.getHeight();//720
+                float ratio=(float)pic_height /(float)pic_width;
                 int height,width,x_center,y_center;
-                 height = (int) (pic_height * 0.8);
+                 height = (int) (pic_height * 0.8);//屏幕宽的0.8,拍照取景框的宽为屏幕的0.8
                  width = (int) (height * 1.6);
                  x_center=pic_width/2;
                  y_center=pic_height/2;
 
 
                 Matrix matrix = new Matrix();
-                matrix.postRotate(180,pic_width/2,pic_height/2);
+                matrix.postRotate(360,pic_width/2,pic_height/2);
                 bm = Bitmap.createBitmap(bm, x_center - (width / 2) ,
                       y_center - (height / 2) ,
-                        (int) (pic_width*0.8),
+                        (int) (pic_height*0.8*1.6),
                         (int) (pic_height*0.8),
-                        matrix,true);
+                        matrix,false);
 
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     Log.i(TAG, "Environment.getExternalStorageDirectory()="+Environment.getExternalStorageDirectory());
