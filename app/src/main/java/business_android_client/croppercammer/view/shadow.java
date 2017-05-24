@@ -2,7 +2,6 @@ package business_android_client.croppercammer.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.support.annotation.Nullable;
@@ -41,8 +40,7 @@ public class shadow extends View {
 
         canvas.clipRect(0, 0, screenWidth, screenHeitht);
         canvas.clipRect(getShadowRegionRect(), Region.Op.DIFFERENCE);
-        canvas.drawColor(Color.GREEN);
-//        drawScene(canvas);
+        canvas.drawColor(0x60000000);
         canvas.restore();
     }
 
@@ -65,7 +63,7 @@ public class shadow extends View {
        int x_center=screenWidth/2;
        int y_center=screenHeitht/2;
 //       return new Rect(0, y_center - (height / 2), screenWidth, height/2 + y_center);
-       return new Rect(x_center-(height/2), y_center - (height / 2), x_center+(height/2), (width/2)+ y_center);
+       return new Rect(x_center-(height/2), y_center - (width / 2), x_center+(height/2), (width/2)+ y_center);
 
     }
 }

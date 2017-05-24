@@ -7,7 +7,7 @@
     android:background="#ffffff"
     tools:context="business_android_client.croppercammer.MainActivity">
 
-    <SurfaceView
+    <business_android_client.croppercammer.ClipCamera
         android:id="@+id/surface_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -18,9 +18,16 @@
         android:layout_height="match_parent"
         />
 
+    <ImageView
+        android:id="@+id/iv"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <Button
         android:layout_alignParentBottom="true"
-        android:id="@+id/btn_shoot"
+        android:id="@+id/btn_cancle"
         android:text="取消"
         android:layout_width="100dp"
         android:layout_height="80dp" />
@@ -28,7 +35,7 @@
     <Button
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:id="@+id/btn_cancle"
+        android:id="@+id/btn_shoot"
         android:layout_width="100dp"
         android:text="拍照"
         android:layout_height="80dp" />
