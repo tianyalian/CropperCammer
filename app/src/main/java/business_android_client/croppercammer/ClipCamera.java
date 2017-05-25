@@ -192,7 +192,6 @@ public class ClipCamera extends SurfaceView implements SurfaceHolder.Callback, C
                 bm = BitmapFactory.decodeByteArray(data, 0, data.length);
                 int pic_width = bm.getWidth();//1280
                 int  pic_height= bm.getHeight();//720
-                float ratio=(float)pic_height /(float)pic_width;
                 int height,width,x_center,y_center;
                  height = (int) (pic_height * 0.8);//屏幕宽的0.8,拍照取景框的宽为屏幕的0.8
                  width = (int) (height * 1.6);

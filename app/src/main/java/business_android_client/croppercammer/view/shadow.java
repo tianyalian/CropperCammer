@@ -57,9 +57,13 @@ public class shadow extends View {
         screenWidth = getMeasuredWidth();
     }
 
+    /**
+     * 获取身份证取景框的矩形
+     * @return
+     */
    private Rect getShadowRegionRect(){
-       int height = (int) (screenWidth * 0.8);
-       int width = (int) (height * 1.6);
+       int height = (int) (screenWidth * 0.8);//拍照的阴影框的高度为屏幕宽度的80%  0.8
+       int width = (int) (height * 1.6);//身份证宽高比例为1.6
 //        int height= (int) (screenWidth/1.6);
        int x_center=screenWidth/2;
        int y_center=screenHeitht/2;

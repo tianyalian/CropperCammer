@@ -10,16 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, ClipCamera.IAutoFocus {
 
     private ClipCamera camera;
     private Button btn_shoot;
     private Button btn_cancle;
-    private ImageView iv;
-    private TextView tv_hint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView() {
         camera = (ClipCamera) findViewById(R.id.surface_view);
         btn_shoot = (Button) findViewById(R.id.btn_shoot);
-        tv_hint = (TextView) findViewById(R.id.tv_hint);
-        iv = (ImageView) findViewById(R.id.iv);
         btn_cancle = (Button) findViewById(R.id.btn_cancle);
         btn_shoot.setOnClickListener(this);
         btn_cancle.setOnClickListener(this);
@@ -60,9 +54,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void takePhoto() {
         String path = Environment.getExternalStorageDirectory().getPath() + "/test.jpg";
         camera.takePicture(path);
-//        iv.setVisibility(View.VISIBLE);
-//        iv.setImageBitmap(BitmapFactory.decodeFile(path));
-
     }
 
 
