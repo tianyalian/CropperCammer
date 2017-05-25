@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_shoot.setOnClickListener(this);
         btn_cancle.setOnClickListener(this);
         camera.setIAutoFocus(this);
-
     }
 
     @Override
