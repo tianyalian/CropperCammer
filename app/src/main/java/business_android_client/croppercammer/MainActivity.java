@@ -1,36 +1,49 @@
 package business_android_client.croppercammer;
 
-import android.graphics.BitmapFactory;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, ClipCamera.IAutoFocus {
 
     private ClipCamera camera;
     private Button btn_shoot;
     private Button btn_cancle;
     private ImageView iv;
+    private TextView tv_hint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
-        initView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 22);
+        } else {
+            setContentView(R.layout.activity_main);
+            initView();
+        }
+
     }
 
     private void initView() {
         camera = (ClipCamera) findViewById(R.id.surface_view);
         btn_shoot = (Button) findViewById(R.id.btn_shoot);
+        tv_hint = (TextView) findViewById(R.id.tv_hint);
         iv = (ImageView) findViewById(R.id.iv);
         btn_cancle = (Button) findViewById(R.id.btn_cancle);
         btn_shoot.setOnClickListener(this);
         btn_cancle.setOnClickListener(this);
+        camera.setIAutoFocus(this);
+
     }
 
     @Override
@@ -48,7 +61,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void takePhoto() {
         String path = Environment.getExternalStorageDirectory().getPath() + "/test.jpg";
         camera.takePicture(path);
-        iv.setVisibility(View.VISIBLE);
-        iv.setImageBitmap(BitmapFactory.decodeFile(path));
+//        iv.setVisibility(View.VISIBLE);
+//        iv.setImageBitmap(BitmapFactory.decodeFile(path));
+
+    }
+
+
+    @Override
+    public void autoFocus() {
+        camera.setAutoFocus();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 22) {
+            for (int i=0;i< permissions.length;i++) {
+                String s = permissions[i];
+                if (s.equals(Manifest.permission.CAMERA) && grantResults[i]== PackageManager.PERMISSION_GRANTED) {
+                    setContentView(R.layout.activity_main);
+                    initView();
+                }
+            }
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+//                  setContentView(R.layout.activity_main);
+//                    initView();
+//            }
+        }
     }
 }

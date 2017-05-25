@@ -7,6 +7,7 @@
     android:background="#ffffff"
     tools:context="business_android_client.croppercammer.MainActivity">
 
+
     <business_android_client.croppercammer.ClipCamera
         android:id="@+id/surface_view"
         android:layout_width="fill_parent"
@@ -23,22 +24,30 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请把身份证放入取景框,水平拍摄"
+        android:textColor="#fff"
+        android:rotation="90"
+        android:layout_centerInParent="true"
+        />
 
 
     <Button
-        android:layout_alignParentBottom="true"
         android:id="@+id/btn_cancle"
-        android:text="取消"
-        android:layout_width="100dp"
-        android:layout_height="80dp" />
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/cancle_wite"
+        />
 
     <Button
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:id="@+id/btn_shoot"
-        android:layout_width="100dp"
-        android:text="拍照"
-        android:layout_height="80dp" />
+        android:layout_width="70dp"
+        android:background="@drawable/sure_wite"
+        android:layout_height="70dp" />
 
 
 </RelativeLayout>

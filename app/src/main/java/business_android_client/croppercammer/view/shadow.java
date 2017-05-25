@@ -41,6 +41,7 @@ public class shadow extends View {
         canvas.clipRect(0, 0, screenWidth, screenHeitht);
         canvas.clipRect(getShadowRegionRect(), Region.Op.DIFFERENCE);
         canvas.drawColor(0x60000000);
+        canvas.save();
         canvas.restore();
     }
 

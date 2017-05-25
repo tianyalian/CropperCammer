@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
@@ -232,8 +233,13 @@ public class ClipCamera extends SurfaceView implements SurfaceHolder.Callback, C
                     Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                     intent.setData(uri);
                     ctx.sendBroadcast(intent);
+                    ctx.startActivity(intent.setClass(ctx,PreView.class));
                 } catch (IOException e) {
                     e.printStackTrace();
+
+
+
+
                 }
             }
 
@@ -249,5 +255,27 @@ public class ClipCamera extends SurfaceView implements SurfaceHolder.Callback, C
         mCamera.takePicture(null, null, jpeg);
     }
 
+    private IAutoFocus mIAutoFocus;
+
+    /** 聚焦的回调接口 */
+    public interface  IAutoFocus{
+        void autoFocus();
+    }
+
+    public void setIAutoFocus(IAutoFocus mIAutoFocus) {
+        this.mIAutoFocus = mIAutoFocus;
+    }
+
+    public void setAutoFocus(){
+        mCamera.autoFocus(this);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (mIAutoFocus != null){
+            mIAutoFocus.autoFocus();
+        }
+        return super.onTouchEvent(event);
+    }
 
 }
